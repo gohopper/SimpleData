@@ -10,9 +10,9 @@ namespace DataTest
     public class TestDatabase
     {
         private const string DB_DATA =
-            "red,255,0,0\n" +
-            "green,0,0,255\n" +
-            "blue,0,0,255\n";
+            "red,255,0\n" +
+            "green,0,255\n" +
+            "white,255,255\n";
 
         [TestMethod]
         public void TestConstructData()

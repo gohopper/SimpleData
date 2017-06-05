@@ -15,7 +15,7 @@ namespace DataLibrary
         /// <summary>
         /// The coordinates
         /// </summary>
-        private readonly float x, y, z;
+        private readonly float x, y;
         /// <summary>
         /// The character used as a field delimiter when converting to a string
         /// </summary>
@@ -27,8 +27,7 @@ namespace DataLibrary
         /// <param name="name">The name of the item</param>
         /// <param name="x">The x coordinate</param>
         /// <param name="y">The y coordinate</param>
-        /// <param name="z">The z coordinate</param>
-        public NamedPoint(string name, float x, float y, float z)
+        public NamedPoint(string name, float x, float y)
         {
             if (name.Contains(FIELD_DELIM))
             {
@@ -37,7 +36,6 @@ namespace DataLibrary
             this.name = name;
             this.x = x;
             this.y = y;
-            this.z = z;
         }
 
         /// <summary>
@@ -48,15 +46,14 @@ namespace DataLibrary
         public static NamedPoint Parse(string record)
         {
             string[] parts = record.Split(FIELD_DELIM);
-            if (parts.Length != 4)
+            if (parts.Length != 3)
             {
                 throw new ArgumentException(String.Format("invalid record format: {0}", record));
             }
             string name = parts[0].Trim();
             float x = float.Parse(parts[1]);
             float y = float.Parse(parts[2]);
-            float z = float.Parse(parts[3]);
-            return new NamedPoint(name, x, y, z);
+            return new NamedPoint(name, x, y);
         }
 
         /// <summary>
@@ -65,7 +62,7 @@ namespace DataLibrary
         /// <returns>The item formatted as a string</returns>
         public string ToCsv()
         {
-            return String.Format("{1}{0}{2}{0}{3}{0}{4}", FIELD_DELIM, this.name, this.x, this.y, this.z);
+            return String.Format("{1}{0}{2}{0}{3}", FIELD_DELIM, this.name, this.x, this.y);
         }
 
         /// <summary>
@@ -74,7 +71,7 @@ namespace DataLibrary
         /// <returns>The item formatted as a string</returns>
         public override string ToString()
         {
-            return String.Format("Point {0} at ({1},{2},{3})", this.name, this.x, this.y, this.z);
+            return String.Format("Point {0} at ({1},{2})", this.name, this.x, this.y);
         }
 
         /// <summary>
@@ -106,21 +103,12 @@ namespace DataLibrary
         }
 
         /// <summary>
-        /// The z coordinate
-        /// </summary>
-        /// <returns></returns>
-        public float GetZ()
-        {
-            return z;
-        }
-
-        /// <summary>
         /// The distance from the origin to this point.
         /// </summary>
         /// <returns>the distance</returns>
         public float GetMagnitude()
         {
-            return (float)Math.Sqrt(x * x + y * y + z * z);
+            return (float)Math.Sqrt(x * x + y * y);
         }
 
         /// <summary>

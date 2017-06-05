@@ -38,9 +38,9 @@ namespace DataLibrary
         /// <param name="x"></param>
         /// <param name="y"></param>
         /// <param name="z"></param>
-        public void AddItem(string name, int x = 0, int y = 0, int z = 0)
+        public void AddItem(string name, int x, int y)
         {
-            NamedPoint newItem = new NamedPoint(name, x, y, z);
+            NamedPoint newItem = new NamedPoint(name, x, y);
             AddItem(newItem);
         }
 
